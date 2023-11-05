@@ -23,7 +23,7 @@ function findWeather(props) {
   //const cityName = props; // "New York";
   const apiKey = 'bdba01f2e3e68946dcdc8126a8ceb556';
 
-  console.log(props);
+  //console.log(props);
   const response = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${props}&units=imperial&appid=${apiKey}`)
   .then((response) => response.json())
   .then(result => {
@@ -61,7 +61,7 @@ if(weatherData != "") {
         </a>
       </div>
       <h1>Vite + React</h1>    
-      <div>
+      <div className="searchBar">
         <form method="post" onSubmit={handleSubmit}>
           <label>City Name: 
             <input type="text" 
@@ -73,34 +73,44 @@ if(weatherData != "") {
             <hr />
             <button type="submit">Find Weather: </button>
         </form>
-      </div>
-      <hr />
-      <div>
-        <h2>Weather Data</h2>      
+        
+      <div className="weather_panel">
+        <h2>Weather Data Now</h2>      
         <h3>Location: {inputName}</h3>
-
-        <table>
+        <table>          
           <tbody>
           <tr>
+            <td>Feels like</td>
+            <td>{weatherData.main.feels_like} ºF</td>
+          </tr>
+          <tr>
             <td>Temp</td>
-            <td>{weatherData.main.temp}</td>
+            <td>{weatherData.main.temp} ºF</td>
           </tr>
           <tr>
-            <td>Humidity</td>
-            <td>{weatherData.main.humidity}</td>   
+            <td>High Temp</td>
+            <td>{weatherData.main.temp_max} ºF</td>
           </tr>
           <tr>
-            <td>Wind Speed</td>
-            <td>{weatherData.wind.speed}</td>   
+            <td>Low Temp</td>
+            <td>{weatherData.main.temp_min} ºF</td>
           </tr>
+          <tr>
+              <td>Humidity</td>
+              <td>{weatherData.main.humidity}%</td>   
+            </tr>
+            <tr>
+              <td>Pressure</td>
+              <td>{weatherData.main.pressure}</td>
+            </tr>
+            <tr>
+              <td>Wind Speed</td>
+              <td>{weatherData.wind.speed} mph</td>   
+            </tr>
           </tbody>
         </table>
-
       </div>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </div>
     </>
   )
   }

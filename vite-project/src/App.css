@@ -43,16 +43,25 @@
 
 table {
   font-family: arial, sans-serif;
-  border-collapse: collapse;
+  border-collapse:separate;
+  border:solid black 3px;
+  border-radius:6px;
   width: 100%;
 }
 
 td, th {
   border: 1px solid #535151;
+  border-radius:10px;
   text-align: left;
   padding: 4px;
 }
 
 tr:nth-child(even) {
   background-color: #313030;
+}
+
+.searchBar {
+  background-color: #888;
+  border-radius: 5%;
+  padding: 15px;
 }
