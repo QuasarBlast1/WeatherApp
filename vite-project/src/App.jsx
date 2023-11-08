@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 
 import './App.css'
 
+
 export default function App() {
 
 // Form for name
@@ -32,6 +33,18 @@ function findWeather(props) {
   });
 }
 
+function fiveDayForecast(props){
+  //https://openweathermap.org/forecast5
+  //api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
+  const apiKey = 'bdba01f2e3e68946dcdc8126a8ceb556';
+  const response = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props}&appid=${apiKey}`)
+  .then((response) => response.json())
+  .then(result => {
+        setWeatherData(result)
+        console.log(result);
+  });
+}
+
 function handleSubmit(e) {
   // Prevent the browser from reloading the page
   e.preventDefault();
@@ -48,35 +61,32 @@ function handleSubmit(e) {
 
   // Calls OpenWeather API to find weather in New York city.
   findWeather(formJson.name); 
+  //fiveDayForecast(formJson.name);
 }
 if(weatherData != "") {
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>    
-      <div className="searchBar">
-        <form method="post" onSubmit={handleSubmit}>
-          <label>City Name: 
-            <input type="text" 
-            name="name" 
-            defaultValue="" 
-            />
-            </label>
-      
-            <hr />
-            <button type="submit">Find Weather: </button>
-        </form>
         
-      <div className="weather_panel">
-        <h2>Weather Data Now</h2>      
-        <h3>Location: {inputName}</h3>
+      </div>
+      <h1>Vite + React</h1>
+      <div className='wrapper'>    
+        <div className="searchBar">
+          <form method="post" onSubmit={handleSubmit}>
+            <label>City Name: 
+              <input type="text" 
+              name="name" 
+              defaultValue="" 
+              />
+              </label>
+        
+              <hr />
+              <button type="submit">Find Weather: </button>
+          </form>
+          <h3>Location: {inputName}</h3>
+        </div>
+        <div className="weather_panel_today">
+        <h4>Weather Data Now</h4>
         <table>          
           <tbody>
           <tr>
@@ -109,8 +119,11 @@ if(weatherData != "") {
             </tr>
           </tbody>
         </table>
+        </div>
+        <div className='weather_panel_week'>
+        </div>
       </div>
-      </div>
+      
     </>
   )
   }
