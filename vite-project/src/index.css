@@ -37,6 +37,18 @@ h1 {
   padding: 0.6em 1.2em;
 }
 
+ul li a {
+  color: #000;
+ }
+ 
+ ul li a:hover {
+  color: #00a8ff;
+ }
+ 
+ ul li a.active {
+  color: #00a8ff;
+ }
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

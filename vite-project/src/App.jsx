@@ -3,6 +3,12 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 import './App.css'
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+import SignUp from './pages/signup.jsx'
+import NavBar from './components/index.jsx'
+
+import dbsetup from "./dbSetup"
+
 
 
 export default function App() {
@@ -33,17 +39,17 @@ function findWeather(props) {
   });
 }
 
-function fiveDayForecast(props){
-  //https://openweathermap.org/forecast5
-  //api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
-  const apiKey = 'bdba01f2e3e68946dcdc8126a8ceb556';
-  const response = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props}&appid=${apiKey}`)
-  .then((response) => response.json())
-  .then(result => {
-        setWeatherData(result)
-        console.log(result);
-  });
-}
+// function fiveDayForecast(props){
+//   //https://openweathermap.org/forecast5
+//   //api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
+//   const apiKey = 'bdba01f2e3e68946dcdc8126a8ceb556';
+//   const response = fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${props}&appid=${apiKey}`)
+//   .then((response) => response.json())
+//   .then(result => {
+//         setWeatherData(result)
+//         console.log(result);
+//   });
+// }
 
 function handleSubmit(e) {
   // Prevent the browser from reloading the page
@@ -66,9 +72,6 @@ function handleSubmit(e) {
 if(weatherData != "") {
   return (
     <>
-      <div>
-        
-      </div>
       <h1>Vite + React</h1>
       <div className='wrapper'>    
         <div className="searchBar">
@@ -128,8 +131,8 @@ if(weatherData != "") {
   )
   }
   // When weather data is == ""
-  return (
-    <>
+  return (  
+    <>   
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
