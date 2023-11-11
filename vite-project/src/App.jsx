@@ -9,8 +9,6 @@ import NavBar from './components/index.jsx'
 
 import dbsetup from "./dbSetup"
 
-
-
 export default function App() {
 
 // Form for name

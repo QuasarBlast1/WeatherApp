@@ -1,32 +1,37 @@
 // CREATE TABLE weather( id SERIAL PRIMARY KEY, input (Text), dateTime(timestamp), api (JSON));
 import { Pool, Client } from 'pg'
 
-export default function dbSetup(){
+export default function dbConnection(){
 
-    const dbUser = 'posgres'
-    const dbName = 'some-postgres'
+    const dbUser = 'postgres'
     const dbHost = 'localhost'
-    const DB_PASS = 'mysecretpassword'
+    const dbName = 'myPostgresDb'
+    const DB_PASS = 'password'
 
-    const client = new Client({
+    const pool = new Pool({
         user: dbUser,
         host: dbHost,     
         password: DB_PASS,
-        port: 5432,
+        port: 5433,
     });
 
     // Need to do the following functions:
-    async function createDB(){
-        console.log("Creating connection ...")
-        await client.connect();
+    async function createConnection(){
+        const client = await pool.connect()
+        console.log(await pool.query('SELECT NOW()'))
+        
         try{
-            console.log("Creating database ...")
-            await client.query(`CREATE DATABASE ${dbName};`)
-        } catch (err) {
-            console.error(err);
+            await pool.end()
+            await client.query('BEGIN')
+            const queryText = `CREATE DATABASE ${dbName}`
+            const res = await client.query(queryText)
+
+            await client.query('COMMIT')
+        } catch (e){
+            await client.query('ROLLBACK')
+            throw e
         } finally {
-            console.log("Closing connection ...")
-            await client.end()
+            client.release()
         }
     }
     // ('CREATE TABLE weather( id SERIAL PRIMARY KEY, input (Text), dateTime(timestamp), api (JSON))')
