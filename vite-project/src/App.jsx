@@ -22,7 +22,7 @@ const [weatherData, setWeatherData] = useState("");
 function findWeather(props) {
   // API call comes from:
   //const cityName = props; // "New York";
-  const apiKey = 'bdba01f2e3e68946dcdc8126a8ceb556';
+  const apiKey = '';
 
   //console.log(props);
   const response = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${props}&units=imperial&appid=${apiKey}`)
