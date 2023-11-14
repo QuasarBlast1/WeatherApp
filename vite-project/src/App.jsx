@@ -26,10 +26,8 @@ const [weatherData, setWeatherData] = useState("");
 function findWeather(props) {
   // API call comes from:
   //const cityName = props; // "New York";
-  const apiKey = `${import.meta.env.VITE_API_KEY}`;
-  //console.log(apiKey)
-  //console.log(process.env.REACT_APP_API_KEY)
-  
+  const apiKey = `${import.meta.env.VITE_API_KEY}`
+
   //console.log(props);
   const response = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${props}&units=imperial&appid=${apiKey}`)
   .then((response) => response.json())
