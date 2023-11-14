@@ -7,8 +7,7 @@ import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import SignUp from './pages/signup.jsx'
 import NavBar from './components/index.jsx'
 
-//import dbsetup from "./dbSetup"
-//import process from '.env'
+//import dbsetup from "../dbSetup.js"
 
 export default function App() {
 
