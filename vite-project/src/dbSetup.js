@@ -20,10 +20,9 @@ export default function dbConnection(){
         const client = await pool.connect()
         console.log(await pool.query('SELECT NOW()'))
         
-        try{
-            await pool.end()
+        try{   
             await client.query('BEGIN')
-            const queryText = `CREATE DATABASE ${dbName}`
+            const queryText = 'CREATE TABLE myTable'
             const res = await client.query(queryText)
 
             await client.query('COMMIT')

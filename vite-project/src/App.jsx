@@ -7,7 +7,8 @@ import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import SignUp from './pages/signup.jsx'
 import NavBar from './components/index.jsx'
 
-import dbsetup from "./dbSetup"
+//import dbsetup from "./dbSetup"
+//import process from '.env'
 
 export default function App() {
 
@@ -15,7 +16,6 @@ export default function App() {
 const [inputName, setInputName] = useState("");
 //const [inputNickname, setInputNickname] = useState("");
 const [weatherData, setWeatherData] = useState("");
-
 
 // Call weather data via lat and lon:
   // Weather Now:
@@ -26,8 +26,10 @@ const [weatherData, setWeatherData] = useState("");
 function findWeather(props) {
   // API call comes from:
   //const cityName = props; // "New York";
-  const apiKey = 'bdba01f2e3e68946dcdc8126a8ceb556';
-
+  const apiKey = `${import.meta.env.VITE_API_KEY}`;
+  //console.log(apiKey)
+  //console.log(process.env.REACT_APP_API_KEY)
+  
   //console.log(props);
   const response = fetch(`https://api.openweathermap.org/data/2.5/weather?q=${props}&units=imperial&appid=${apiKey}`)
   .then((response) => response.json())
