@@ -1,30 +1,35 @@
 // CREATE TABLE weather( id SERIAL PRIMARY KEY, input (Text), dateTime(timestamp), api (JSON));
-import Pool from 'pg'
+import Client from 'pg'
 
 export default function dbConnection(){
 
     const dbUser = 'postgres'
     const dbHost = 'localhost'
-    const dbName = 'myPostgresDb'
+    const dbName = 'postgresDB'
     const DB_PASS = 'password'
 
-    const pool = new Pool({
+    const client = new Client({
         user: dbUser,
         host: dbHost,     
-        database: 'myPostgresDb',
+        database: dbName,
         password: DB_PASS,
         port: 5433,
     });   
 
+    client.connect();
+
+    console.log("Creating Connection")
     console.log("Creating table")
-        const createTableQuery = `
-            CREATE TABLE IF NOT EXISTS table1 (
-                id serial PRIMARY KEY, 
-                firstName VARCHAR(100) NOT NULL,
-                lastName VARCHAR(100) NOT NULL,
-                email VARCHAR(100) NOT NULL
-            )`
-   
-    const result = pool.query(createTableQuery)
-    pool.end();
+    const createTableQuery = `
+        CREATE TABLE IF NOT EXISTS table1 (
+            id serial PRIMARY KEY, 
+            firstName VARCHAR(100) NOT NULL,
+            lastName VARCHAR(100) NOT NULL,
+            email VARCHAR(100) NOT NULL
+        )`
+
+    console.log("Attempting to create table.")
+    client.query(createTableQuery)
+    console.log("Closing Connection")
+    client.end();
 }
