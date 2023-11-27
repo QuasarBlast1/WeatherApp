@@ -1,7 +1,7 @@
 // CREATE TABLE weather( id SERIAL PRIMARY KEY, input (Text), dateTime(timestamp), api (JSON));
 import Client from 'pg'
 
-export default function dbConnection(){
+export const dbConnection = () => {
 
     const dbUser = 'postgres'
     const dbHost = 'localhost'
@@ -33,3 +33,5 @@ export default function dbConnection(){
     console.log("Closing Connection")
     client.end();
 }
+
+export default dbConnection;

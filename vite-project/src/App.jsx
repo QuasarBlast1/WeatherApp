@@ -6,10 +6,12 @@ import './App.css'
 import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
 import SignUp from './pages/signup.jsx'
 import NavBar from './components/index.jsx'
-
-//import dbsetup from "../dbSetup.js"
+import dbSetup  from './dbSetup.js'
 
 export default function App() {
+
+  // Make connection to db from dbSetup
+  dbSetup.dbConnection();
 
 // Form for name
 const [inputName, setInputName] = useState("");
